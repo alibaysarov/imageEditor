@@ -5,15 +5,18 @@ from controllers import ImageController
 
 app=Flask(__name__)
 CORS(app)
-@app.get('/')
+@app.get('/api')
 def index():
   return ImageController.sum()
 
-@app.post('/compress')
+@app.post('/api/compress')
 def compress():
   return ImageController.compressImage()
-@app.post('/rotate/<degs>')
+@app.post('/api/rotate/<degs>')
 def rotate(degs):
   return ImageController.rotateImage(degs)
+@app.post('/api/crop')
+def crop():
+  return ImageController.cropImage()
 
 app.run(port=5000,debug=True)

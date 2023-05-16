@@ -1,5 +1,6 @@
-from flask import request
+from flask import request,jsonify
 from PIL import Image
+import json
 import os 
 absolute_path = os.path.dirname(__file__)
 relative_path = "images"
@@ -26,7 +27,14 @@ class ImageController:
         imageToCompress.resize(size,Image.ANTIALIAS)
         imageToCompress.save(f'{full_path}/compressed.{ext}')
         return file.filename
-    
+    @staticmethod
+    def cropImage():
+        
+        res=request.form.to_dict(flat=False)
+        res=json.loads(res['params'][0])
+        dictParams=json.loads(res)
+        print(dictParams['x'])
+        return '123'
 
 
     @staticmethod 
